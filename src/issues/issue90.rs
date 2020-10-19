@@ -11,7 +11,7 @@ impl IssueChecker for Issue90 {
             .map(Into::into)
             .collect();
 
-        if errors.is_empty() {
+        if !errors.is_empty() {
             Some(Bug::new(self.issue_id(), errors))
         } else {
             None
