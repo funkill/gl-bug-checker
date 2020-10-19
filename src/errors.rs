@@ -39,7 +39,7 @@ impl Display for Bugs {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Bug {
     issue_id: &'static str,
     errors: Vec<String>,
