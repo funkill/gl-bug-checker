@@ -1,5 +1,7 @@
 use crate::{errors::Bug, IssueChecker};
 
+const ISSUE_ID: &str = "90";
+
 pub(crate) struct Issue90;
 
 impl IssueChecker for Issue90 {
@@ -19,6 +21,37 @@ impl IssueChecker for Issue90 {
     }
 
     fn issue_id(&self) -> &'static str {
-        "90"
+        ISSUE_ID
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{ISSUE_ID, Issue90};
+    use crate::{errors::Bug, IssueChecker};
+
+    macro_rules! test_gen {
+        ($($name:ident, $translation:literal, $expected:expr),+) => {
+            $(
+                #[test]
+                fn $name() {
+                    let issue = Issue90;
+                    let actual = issue.check("", $translation);
+
+                    assert_eq!($expected, actual);
+                }
+            )+
+        };
+    }
+
+    test_gen!(
+        no_bug, "some text without comments", None,
+        one_line, "<comment>some text", Some(Bug::new(ISSUE_ID, vec![String::from("<comment>some text")])),
+        multiline, r#"some text
+<comment>text after comment
+some text
+text before comment<comment>text after comment
+some text"#,
+        Some(Bug::new(ISSUE_ID, vec![String::from("<comment>text after comment"), String::from("text before comment<comment>text after comment")]))
+    );
 }
