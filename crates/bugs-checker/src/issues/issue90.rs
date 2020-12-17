@@ -6,10 +6,9 @@ pub(crate) struct Issue90;
 
 impl IssueChecker for Issue90 {
     fn check(&self, _: &str, translation: &str) -> Option<Bug> {
-        let errors: Vec<String> = translation.lines()
-            .filter(|line| {
-                line.contains("<comment>")
-            })
+        let errors: Vec<String> = translation
+            .lines()
+            .filter(|line| line.contains("<comment>"))
             .map(Into::into)
             .collect();
 
@@ -27,7 +26,7 @@ impl IssueChecker for Issue90 {
 
 #[cfg(test)]
 mod tests {
-    use super::{ISSUE_ID, Issue90};
+    use super::{Issue90, ISSUE_ID};
     use crate::{errors::Bug, IssueChecker};
 
     macro_rules! test_gen {
@@ -45,13 +44,24 @@ mod tests {
     }
 
     test_gen!(
-        no_bug, "some text without comments", None,
-        one_line, "<comment>some text", Some(Bug::new(ISSUE_ID, vec![String::from("<comment>some text")])),
-        multiline, r#"some text
+        no_bug,
+        "some text without comments",
+        None,
+        one_line,
+        "<comment>some text",
+        Some(Bug::new(ISSUE_ID, vec![String::from("<comment>some text")])),
+        multiline,
+        r#"some text
 <comment>text after comment
 some text
 text before comment<comment>text after comment
 some text"#,
-        Some(Bug::new(ISSUE_ID, vec![String::from("<comment>text after comment"), String::from("text before comment<comment>text after comment")]))
+        Some(Bug::new(
+            ISSUE_ID,
+            vec![
+                String::from("<comment>text after comment"),
+                String::from("text before comment<comment>text after comment")
+            ]
+        ))
     );
 }

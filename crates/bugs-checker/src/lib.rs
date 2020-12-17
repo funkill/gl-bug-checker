@@ -1,7 +1,7 @@
 #![feature(format_args_nl, box_patterns, box_syntax)]
 
 use errors::{Bug, Bugs};
-use issues::{issue82::Issue82, issue90::Issue90};
+use issues::{issue68::Issue68, issue82::Issue82, issue90::Issue90};
 
 pub mod errors;
 pub mod issues;
@@ -22,6 +22,7 @@ impl Checker {
 
     pub fn default_checks() -> Self {
         let checks = vec![
+            box Issue68 as Box<dyn IssueChecker>,
             box Issue82 as Box<dyn IssueChecker>,
             box Issue90 as Box<dyn IssueChecker>,
         ];
