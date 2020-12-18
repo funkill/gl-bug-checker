@@ -1,6 +1,4 @@
 mod config;
-mod git;
-mod shell;
 
 use anyhow::{anyhow, Result};
 use bugs_checker::{
@@ -8,8 +6,8 @@ use bugs_checker::{
     Checker, TranslaitionPair,
 };
 use clap::{App, Arg, ArgMatches};
+use common::repo::TranslationRepo;
 use config::Config;
-use git::TranslationRepo;
 
 fn main() -> Result<()> {
     let config = configure()?;

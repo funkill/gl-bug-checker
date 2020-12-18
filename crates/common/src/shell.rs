@@ -1,4 +1,4 @@
-use anyhow::Result;
+use crate::Result;
 use std::process::{Command, Stdio};
 
 pub struct Shell;
