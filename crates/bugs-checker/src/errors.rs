@@ -63,7 +63,11 @@ impl Display for Bug {
             Ok(())
         }
 
-        f.write_fmt(format_args_nl!("\tLink to issue: {}{}", GL_FEEDBACK_REPO, self.issue_id))?;
+        f.write_fmt(format_args_nl!(
+            "\tLink to issue: {}{}",
+            GL_FEEDBACK_REPO,
+            self.issue_id
+        ))?;
         f.write_str("\tContent:\n")?;
         format_errors(f, &self.errors)
     }
