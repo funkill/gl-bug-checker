@@ -9,9 +9,7 @@ pub(crate) struct Issue68;
 
 impl IssueChecker for Issue68 {
     fn check(&self, _: &str, translation: &str) -> Option<Bug> {
-        let re = REGEX.get_or_init(|| {
-            Regex::new(r#"\{[\w]{1,6}[\d]{1,2}\}"#).unwrap()
-        });
+        let re = REGEX.get_or_init(|| Regex::new(r#"\{[\w]{1,6}[\d]{1,2}\}"#).unwrap());
         let errors: Vec<String> = re
             .captures_iter(translation)
             .map(|item| String::from(&item[0]))

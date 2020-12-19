@@ -1,5 +1,5 @@
-use std::path::Path;
 use common::{git::Git, github::Github};
+use std::path::Path;
 
 type Result<T> = anyhow::Result<T>;
 
@@ -8,23 +8,20 @@ async fn main() -> Result<()> {
     let gh_token = std::env::var("GITHUB_TOKEN")?;
     let github = Github::new(gh_token)?;
 
-    let (files_count, sym_count) = Git.changed_files()?
+    let (files_count, sym_count) = Git
+        .changed_files()?
         .iter()
-        .filter(|file| {
-            file.ends_with("md")
-        })
+        .filter(|file| file.ends_with("md"))
         .map(count_for_file)
         .fold((0, 0), |(files, symbols), count| {
             (files + 1, symbols + count)
         });
 
-    println!(
-        "Files: {}, symbols: {}",
-        files_count,
-        sym_count
-    );
+    println!("Files: {}, symbols: {}", files_count, sym_count);
 
-    github.comment_pr(format!("Файлов: {}, символов: {}", files_count, sym_count)).await
+    github
+        .comment_pr(format!("Файлов: {}, символов: {}", files_count, sym_count))
+        .await
 }
 
 fn count_for_file<P: AsRef<Path>>(file: P) -> usize {
@@ -33,6 +30,6 @@ fn count_for_file<P: AsRef<Path>>(file: P) -> usize {
         Err(e) => {
             log::info!("Read file to string error: {:?}", e);
             0
-        },
+        }
     }
 }
