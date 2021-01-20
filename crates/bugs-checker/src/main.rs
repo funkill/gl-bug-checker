@@ -6,13 +6,13 @@ use bugs_checker::{
     Checker, TranslaitionPair,
 };
 use clap::{App, Arg, ArgMatches};
-use common::repo::TranslationRepo;
+use common::translation_project::TranslationProject;
 use config::Config;
 
 fn main() -> Result<()> {
     let config = configure()?;
     let checker = Checker::default_checks();
-    let bugs = TranslationRepo::new(&config.translation_dir, &config.original_dir)
+    let bugs = TranslationProject::new(&config.translation_dir, &config.original_dir)?
         .changed_file_pairs(".md")?
         .iter()
         .filter_map(|(original, translation)| {
