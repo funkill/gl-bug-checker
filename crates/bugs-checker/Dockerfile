@@ -1,7 +1,7 @@
 FROM rustlang/rust:nightly-buster as builder
 
 COPY . /opt/app/
-RUN cd /opt/app && cargo build --release
+RUN cd /opt/app && cargo build --release --bin bugs-checker
 
 FROM debian:buster-slim as target
 RUN apt-get update -qq && apt-get install -y git && rm -rf /var/lib/apt/lists/*
