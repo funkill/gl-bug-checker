@@ -2,6 +2,7 @@
 
 pub mod github_event;
 pub mod git;
+#[cfg(feature = "github-api")]
 pub mod github;
 pub mod logger;
 pub mod shell;

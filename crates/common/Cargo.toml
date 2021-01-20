@@ -8,8 +8,12 @@ edition = "2018"
 
 [dependencies]
 anyhow = "1.0"
-hubcaps = "0.6"
 git2 = "0.13"
+hubcaps = { version = "0.6", optional = true }
 json = "0.12"
 log = "0.4"
 pretty_env_logger = "0.4"
+
+[features]
+default = []
+github-api = ["hubcaps"]
