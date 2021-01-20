@@ -1,5 +1,6 @@
 #![feature(str_split_once)]
 
+pub mod github_event;
 pub mod git;
 pub mod github;
 pub mod logger;
