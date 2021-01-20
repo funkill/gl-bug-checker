@@ -1,15 +1,13 @@
 mod config;
 
 use anyhow::{anyhow, Result};
-use bugs_checker::{
-    errors::{Bugs, GLError},
-    Checker, TranslaitionPair,
-};
+use bugs_checker::{errors::Bugs, Checker, TranslaitionPair};
 use clap::{App, Arg, ArgMatches};
-use common::translation_project::TranslationProject;
+use common::{logger::Logger, translation_project::TranslationProject};
 use config::Config;
 
 fn main() -> Result<()> {
+    let logger = Logger::init();
     let config = configure()?;
     let checker = Checker::default_checks();
     let bugs = TranslationProject::new(&config.translation_dir, &config.original_dir)?
@@ -29,10 +27,20 @@ fn main() -> Result<()> {
         })
         .collect::<Vec<Bugs>>();
 
-    if bugs.is_empty() {
-        Ok(())
+    if !bugs.is_empty() {
+        for bug in bugs {
+            logger.group(bug.file);
+            let bugs = bug.bugs.iter().fold(String::new(), |mut acc, bug| {
+                acc += &bug.to_string();
+                acc
+            });
+            log::error!("{}", bugs);
+            logger.end_group();
+        }
+
+        anyhow::bail!("Found some Gitlocalize bugs")
     } else {
-        Err(GLError(bugs).into())
+        Ok(())
     }
 }
 
