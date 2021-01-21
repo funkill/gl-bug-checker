@@ -20,8 +20,8 @@ impl Display for GLError {
 
 #[derive(Debug)]
 pub struct Bugs {
-    file: String,
-    bugs: Vec<Bug>,
+    pub file: String,
+    pub bugs: Vec<Bug>,
 }
 
 impl Bugs {

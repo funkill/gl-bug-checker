@@ -9,5 +9,5 @@ edition = "2018"
 [dependencies]
 anyhow = "1.0"
 log = "0.4"
-common = { path = "../common" }
+common = { path = "../common", features = ["github-api"] }
 tokio = { version = "0.2", features = ["full"] }
