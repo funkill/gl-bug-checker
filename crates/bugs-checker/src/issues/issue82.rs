@@ -35,18 +35,18 @@ impl IssueChecker for Issue82 {
 
         if original_code_blocks.len() != translation_code_blocks.len() {
             panic!(
-                "Code blocks has different length: tranlsation is {} items and original is {} items\n{:?}",
+                "Code blocks has different length: translation is {} items and original is {} items\n{:?}",
                 translation_code_blocks.len(),
                 original_code_blocks.len(),
                 translation_code_blocks
             );
         }
 
-        let mut oroginal_blocks_iter = original_code_blocks.iter();
+        let mut original_blocks_iter = original_code_blocks.iter();
         let mut translation_blocks_iter = translation_code_blocks.iter();
         let mut errors = vec![];
         while let (Some(translation_code), Some(original_code)) =
-            (translation_blocks_iter.next(), oroginal_blocks_iter.next())
+            (translation_blocks_iter.next(), original_blocks_iter.next())
         {
             if original_code.lines().count() < 2 {
                 continue;

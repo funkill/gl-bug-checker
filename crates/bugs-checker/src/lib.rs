@@ -30,7 +30,7 @@ impl Checker {
         Checker::new(checks)
     }
 
-    pub fn check_file(&self, pair: &TranslaitionPair) -> Option<Bugs> {
+    pub fn check_file(&self, pair: &TranslationPair) -> Option<Bugs> {
         let bugs = self
             .checks
             .iter()
@@ -45,7 +45,7 @@ impl Checker {
     }
 }
 
-pub struct TranslaitionPair<'filename> {
+pub struct TranslationPair<'filename> {
     pub filename: &'filename str,
     pub original: String,
     pub translation: String,
