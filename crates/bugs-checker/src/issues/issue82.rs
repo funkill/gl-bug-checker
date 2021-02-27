@@ -1,4 +1,4 @@
-use crate::{errors::Bug, IssueChecker};
+use crate::{errors::{Bug, ErrorDescription}, IssueChecker};
 use pulldown_cmark::{CowStr, Event, Parser, Tag};
 
 pub(crate) struct Issue82;
@@ -53,7 +53,11 @@ impl IssueChecker for Issue82 {
             }
 
             if translation_code.lines().count() == 1 {
-                errors.push(translation_code.clone().to_string())
+                let desc = ErrorDescription::Content {
+                    origin: original_code.to_string(),
+                    translation: translation_code.to_string(),
+                };
+                errors.push(desc);
             }
         }
 

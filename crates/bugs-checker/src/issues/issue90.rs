@@ -1,4 +1,4 @@
-use crate::{errors::Bug, IssueChecker};
+use crate::{errors::{Bug, ErrorDescription}, IssueChecker};
 
 const ISSUE_ID: &str = "90";
 
@@ -6,10 +6,11 @@ pub(crate) struct Issue90;
 
 impl IssueChecker for Issue90 {
     fn check(&self, _: &str, translation: &str) -> Option<Bug> {
-        let errors: Vec<String> = translation
+        let errors: Vec<_> = translation
             .lines()
             .filter(|line| line.contains("<comment>"))
-            .map(Into::into)
+            .map(String::from)
+            .map(ErrorDescription::SimpleString)
             .collect();
 
         if !errors.is_empty() {
