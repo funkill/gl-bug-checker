@@ -1,7 +1,7 @@
 mod config;
 
 use anyhow::{anyhow, Result};
-use bugs_checker::{errors::Bugs, Checker, TranslaitionPair};
+use bugs_checker::{errors::Bugs, Checker, TranslationPair};
 use clap::{App, Arg, ArgMatches};
 use common::{logger::Logger, translation_project::TranslationProject};
 use config::Config;
@@ -17,7 +17,7 @@ fn main() -> Result<()> {
             // todo: нужны нормальные ошибки
             let original_content = std::fs::read_to_string(&original).unwrap();
             let translation_content = std::fs::read_to_string(&translation).unwrap();
-            let pair = TranslaitionPair {
+            let pair = TranslationPair {
                 filename: translation,
                 original: original_content,
                 translation: translation_content,
