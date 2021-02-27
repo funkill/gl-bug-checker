@@ -1,4 +1,7 @@
-use crate::{errors::{Bug, ErrorDescription}, IssueChecker};
+use crate::{
+    errors::{Bug, ErrorDescription},
+    IssueChecker,
+};
 
 const ISSUE_ID: &str = "90";
 

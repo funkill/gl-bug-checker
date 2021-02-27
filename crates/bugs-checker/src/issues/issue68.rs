@@ -1,7 +1,10 @@
 use once_cell::sync::OnceCell;
 use regex::Regex;
 
-use crate::{errors::{Bug, ErrorDescription}, IssueChecker};
+use crate::{
+    errors::{Bug, ErrorDescription},
+    IssueChecker,
+};
 
 static REGEX: OnceCell<Regex> = OnceCell::new();
 

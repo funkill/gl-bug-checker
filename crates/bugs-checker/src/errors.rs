@@ -44,10 +44,7 @@ impl Display for Bugs {
 #[derive(Debug, PartialEq, Eq)]
 pub enum ErrorDescription {
     SimpleString(String),
-    Content {
-        origin: String,
-        translation: String,
-    }
+    Content { origin: String, translation: String },
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -64,14 +61,24 @@ impl Bug {
 
 impl Display for Bug {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        fn format_errors(f: &mut std::fmt::Formatter<'_>, errors: &[ErrorDescription]) -> std::fmt::Result {
+        fn format_errors(
+            f: &mut std::fmt::Formatter<'_>,
+            errors: &[ErrorDescription],
+        ) -> std::fmt::Result {
             for error in errors {
                 match error {
                     ErrorDescription::SimpleString(s) => {
-                        f.write_fmt(format_args_nl!("\t{}", s))?;        
+                        f.write_fmt(format_args_nl!("\t{}", s))?;
                     }
-                    ErrorDescription::Content { origin, translation} => {
-                        f.write_fmt(format_args_nl!("\tOrigin: \"{}\"\n\tTranslation: \"{}\"", origin, translation))?;
+                    ErrorDescription::Content {
+                        origin,
+                        translation,
+                    } => {
+                        f.write_fmt(format_args_nl!(
+                            "\tOrigin: \"{}\"\n\tTranslation: \"{}\"",
+                            origin,
+                            translation
+                        ))?;
                     }
                 }
             }

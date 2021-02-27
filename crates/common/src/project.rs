@@ -1,4 +1,4 @@
-use crate::{github_event::GithubEvent, git::Git, github::Github};
+use crate::{git::Git, github::Github, github_event::GithubEvent};
 
 pub struct Project {
     git: Git,

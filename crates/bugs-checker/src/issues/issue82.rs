@@ -1,4 +1,7 @@
-use crate::{errors::{Bug, ErrorDescription}, IssueChecker};
+use crate::{
+    errors::{Bug, ErrorDescription},
+    IssueChecker,
+};
 use pulldown_cmark::{CowStr, Event, Parser, Tag};
 
 pub(crate) struct Issue82;

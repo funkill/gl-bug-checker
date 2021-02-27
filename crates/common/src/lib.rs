@@ -1,9 +1,9 @@
 #![feature(str_split_once)]
 
-pub mod github_event;
 pub mod git;
 #[cfg(feature = "github-api")]
 pub mod github;
+pub mod github_event;
 pub mod logger;
 #[cfg(feature = "github-api")]
 pub mod project;
