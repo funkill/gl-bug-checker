@@ -71,7 +71,7 @@ impl Display for Bug {
                         f.write_fmt(format_args_nl!("\t{}", s))?;        
                     }
                     ErrorDescription::Content { origin, translation} => {
-                        f.write_fmt(format_args_nl!("\tOrigin:{}\n\tTranslation{}", origin, translation))?;
+                        f.write_fmt(format_args_nl!("\tOrigin: \"{}\"\n\tTranslation: \"{}\"", origin, translation))?;
                     }
                 }
             }
