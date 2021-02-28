@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+name: Build checker
+
+jobs:
+  build:
+    name: Build checker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+      - run: cargo build
