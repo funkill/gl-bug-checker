@@ -15,4 +15,6 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
-      - run: cargo build
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
