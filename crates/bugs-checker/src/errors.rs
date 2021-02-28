@@ -47,6 +47,22 @@ pub enum ErrorDescription {
     Content { origin: String, translation: String },
 }
 
+impl Display for ErrorDescription {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ErrorDescription::SimpleString(s) => f.write_fmt(format_args_nl!("\t{}", s)),
+            ErrorDescription::Content {
+                origin,
+                translation,
+            } => f.write_fmt(format_args_nl!(
+                "\tOrigin: \"{}\"\n\tTranslation: \"{}\"",
+                origin,
+                translation
+            )),
+        }
+    }
+}
+
 #[derive(Debug, PartialEq, Eq)]
 pub struct Bug {
     issue_id: &'static str,
@@ -61,37 +77,18 @@ impl Bug {
 
 impl Display for Bug {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        fn format_errors(
-            f: &mut std::fmt::Formatter<'_>,
-            errors: &[ErrorDescription],
-        ) -> std::fmt::Result {
-            for error in errors {
-                match error {
-                    ErrorDescription::SimpleString(s) => {
-                        f.write_fmt(format_args_nl!("\t{}", s))?;
-                    }
-                    ErrorDescription::Content {
-                        origin,
-                        translation,
-                    } => {
-                        f.write_fmt(format_args_nl!(
-                            "\tOrigin: \"{}\"\n\tTranslation: \"{}\"",
-                            origin,
-                            translation
-                        ))?;
-                    }
-                }
-            }
-
-            Ok(())
-        }
-
         f.write_fmt(format_args_nl!(
             "\tLink to issue: {}{}",
             GL_FEEDBACK_REPO,
             self.issue_id
         ))?;
+
         f.write_str("\tContent:\n")?;
-        format_errors(f, &self.errors)
+
+        for error in &self.errors {
+            f.write_fmt(format_args!("{}", error))?;
+        }
+
+        Ok(())
     }
 }

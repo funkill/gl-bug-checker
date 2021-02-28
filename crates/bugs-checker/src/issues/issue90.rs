@@ -31,7 +31,10 @@ impl IssueChecker for Issue90 {
 #[cfg(test)]
 mod tests {
     use super::{Issue90, ISSUE_ID};
-    use crate::{errors::Bug, IssueChecker};
+    use crate::{
+        errors::{Bug, ErrorDescription},
+        IssueChecker,
+    };
 
     macro_rules! test_gen {
         ($($name:ident, $translation:literal, $expected:expr),+) => {
@@ -53,7 +56,12 @@ mod tests {
         None,
         one_line,
         "<comment>some text",
-        Some(Bug::new(ISSUE_ID, vec![String::from("<comment>some text")])),
+        Some(Bug::new(
+            ISSUE_ID,
+            vec![ErrorDescription::SimpleString(String::from(
+                "<comment>some text"
+            ))]
+        )),
         multiline,
         r#"some text
 <comment>text after comment
@@ -63,8 +71,10 @@ some text"#,
         Some(Bug::new(
             ISSUE_ID,
             vec![
-                String::from("<comment>text after comment"),
-                String::from("text before comment<comment>text after comment")
+                ErrorDescription::SimpleString(String::from("<comment>text after comment")),
+                ErrorDescription::SimpleString(String::from(
+                    "text before comment<comment>text after comment"
+                ))
             ]
         ))
     );
