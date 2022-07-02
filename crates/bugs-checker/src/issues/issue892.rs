@@ -1,10 +1,9 @@
-use once_cell::sync::OnceCell;
-use regex::Regex;
 use crate::{
     errors::{Bug, ErrorDescription},
     IssueChecker,
 };
-
+use once_cell::sync::OnceCell;
+use regex::Regex;
 
 const ISSUE_ID: &str = "https://github.com/rust-lang-ru/book/issues/892";
 

@@ -1,7 +1,7 @@
 #![feature(format_args_nl, box_patterns, box_syntax)]
 
 use errors::{Bug, Bugs};
-use issues::{issue68::Issue68, issue82::Issue82, issue90::Issue90, issue892::Issue892};
+use issues::{issue68::Issue68, issue82::Issue82, issue892::Issue892, issue90::Issue90};
 
 pub mod errors;
 pub mod issues;

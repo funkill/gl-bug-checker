@@ -75,10 +75,7 @@ impl Bug {
 
 impl Display for Bug {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args_nl!(
-            "\tLink to issue: {}",
-            self.issue_id
-        ))?;
+        f.write_fmt(format_args_nl!("\tLink to issue: {}", self.issue_id))?;
 
         f.write_str("\tContent:\n")?;
 
