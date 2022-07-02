@@ -3,7 +3,7 @@ use crate::{
     IssueChecker,
 };
 
-const ISSUE_ID: &str = "90";
+const ISSUE_ID: &str = "https://github.com/gitlocalize/feedback/issues/90";
 
 pub(crate) struct Issue90;
 
@@ -17,13 +17,13 @@ impl IssueChecker for Issue90 {
             .collect();
 
         if !errors.is_empty() {
-            Some(Bug::new(self.issue_id(), errors))
+            Some(Bug::new(self.issue_link(), errors))
         } else {
             None
         }
     }
 
-    fn issue_id(&self) -> &'static str {
+    fn issue_link(&self) -> &'static str {
         ISSUE_ID
     }
 }

@@ -6,7 +6,9 @@ use pulldown_cmark::{CowStr, Event, Parser, Tag};
 
 pub(crate) struct Issue82;
 
-fn get_code_blocks<'parser>(parser: &mut Parser<'parser>) -> Vec<CowStr<'parser>> {
+fn get_code_blocks<'parser, 'callback>(
+    parser: &mut Parser<'parser, 'callback>,
+) -> Vec<CowStr<'parser>> {
     let mut codes = vec![];
     // let iter = parser.into_iter();
     while let Some(item) = parser.next() {
@@ -67,11 +69,11 @@ impl IssueChecker for Issue82 {
         if errors.is_empty() {
             None
         } else {
-            Some(Bug::new(self.issue_id(), errors))
+            Some(Bug::new(self.issue_link(), errors))
         }
     }
 
-    fn issue_id(&self) -> &'static str {
-        "82"
+    fn issue_link(&self) -> &'static str {
+        "https://github.com/gitlocalize/feedback/issues/82"
     }
 }

@@ -53,12 +53,12 @@ fn configure() -> Result<Config> {
         .args(&[
             Arg::with_name("original-dir")
                 .long("original-dir")
-                .short("o")
+                .short('o')
                 .required(true)
                 .takes_value(true),
             Arg::with_name("translation-dir")
                 .long("translation-dir")
-                .short("t")
+                .short('t')
                 .required(true)
                 .takes_value(true),
         ])

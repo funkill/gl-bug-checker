@@ -1,14 +1,14 @@
 #![feature(format_args_nl, box_patterns, box_syntax)]
 
 use errors::{Bug, Bugs};
-use issues::{issue68::Issue68, issue82::Issue82, issue90::Issue90};
+use issues::{issue68::Issue68, issue82::Issue82, issue892::Issue892, issue90::Issue90};
 
 pub mod errors;
 pub mod issues;
 
 pub trait IssueChecker {
     fn check(&self, original: &str, translation: &str) -> Option<Bug>;
-    fn issue_id(&self) -> &'static str;
+    fn issue_link(&self) -> &'static str;
 }
 
 pub struct Checker {
@@ -25,6 +25,7 @@ impl Checker {
             box Issue68 as Box<dyn IssueChecker>,
             box Issue82 as Box<dyn IssueChecker>,
             box Issue90 as Box<dyn IssueChecker>,
+            box Issue892 as Box<dyn IssueChecker>,
         ];
 
         Checker::new(checks)
