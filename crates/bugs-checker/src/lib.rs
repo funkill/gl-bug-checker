@@ -8,7 +8,7 @@ pub mod issues;
 
 pub trait IssueChecker {
     fn check(&self, original: &str, translation: &str) -> Option<Bug>;
-    fn issue_id(&self) -> &'static str;
+    fn issue_link(&self) -> &'static str;
 }
 
 pub struct Checker {

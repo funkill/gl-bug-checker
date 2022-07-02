@@ -67,11 +67,11 @@ impl IssueChecker for Issue82 {
         if errors.is_empty() {
             None
         } else {
-            Some(Bug::new(self.issue_id(), errors))
+            Some(Bug::new(self.issue_link(), errors))
         }
     }
 
-    fn issue_id(&self) -> &'static str {
-        "82"
+    fn issue_link(&self) -> &'static str {
+        "https://github.com/gitlocalize/feedback/issues/82"
     }
 }

@@ -1,7 +1,5 @@
 use std::fmt::Display;
 
-const GL_FEEDBACK_REPO: &str = "https://github.com/gitlocalize/feedback/issues/";
-
 #[derive(Debug)]
 pub struct GLError(pub Vec<Bugs>);
 
@@ -9,7 +7,7 @@ impl std::error::Error for GLError {}
 
 impl Display for GLError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args_nl!("Found GitLocalize bugs:"))?;
+        f.write_fmt(format_args_nl!("Found bugs:"))?;
         for err in &self.0 {
             f.write_fmt(format_args!("{}", err))?;
         }
@@ -78,8 +76,7 @@ impl Bug {
 impl Display for Bug {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args_nl!(
-            "\tLink to issue: {}{}",
-            GL_FEEDBACK_REPO,
+            "\tLink to issue: {}",
             self.issue_id
         ))?;
 
