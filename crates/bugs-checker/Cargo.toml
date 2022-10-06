@@ -8,7 +8,7 @@ edition = "2021"
 
 [dependencies]
 pulldown-cmark = "0.9"
-clap = "3.2"
+clap = "4.0"
 anyhow = "1.0"
 common = { path = "../common" }
 regex = "1.4"
